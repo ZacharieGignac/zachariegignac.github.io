@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zacharie Gignac | Personal Page</title>
+  <meta
+    name="description"
+    content="Zacharie Gignac builds practical Cisco codec tools, including an AES67 manager and VS Code macro extension."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --bg-0: #070b14;
+      --bg-1: #101a33;
+      --surface: rgba(11, 20, 42, 0.78);
+      --surface-2: rgba(8, 15, 31, 0.88);
+      --line: rgba(142, 175, 238, 0.24);
+      --text: #e7efff;
+      --muted: #9badcc;
+      --primary: #67cbff;
+      --secondary: #5df0ce;
+      --radius: 20px;
+      --card-shadow: 0 20px 46px rgba(0, 0, 0, 0.46);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Outfit", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 500px at 12% -6%, rgba(103, 203, 255, 0.17), transparent 60%),
+        radial-gradient(850px 420px at 94% 0%, rgba(93, 240, 206, 0.14), transparent 58%),
+        linear-gradient(140deg, var(--bg-0) 0%, var(--bg-1) 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    #snake-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.24;
+      filter: blur(1.1px) saturate(1.1);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        linear-gradient(rgba(126, 154, 212, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 154, 212, 0.09) 1px, transparent 1px);
+      background-size: 58px 58px;
+      mask-image: radial-gradient(circle at center, black 24%, transparent 82%);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 380px;
+      height: 380px;
+      right: -110px;
+      bottom: -120px;
+      border-radius: 999px;
+      z-index: -2;
+      background: radial-gradient(circle at center, rgba(103, 203, 255, 0.42), rgba(93, 240, 206, 0.06));
+      filter: blur(48px);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .page {
+      width: min(1080px, calc(100% - 2rem));
+      margin: 1.5rem auto 2.5rem;
+      animation: boot 700ms ease-out both;
+    }
+
+    .hero {
+      --mx: 50%;
+      --my: 50%;
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 4px);
+      background: linear-gradient(180deg, rgba(14, 26, 54, 0.8), rgba(9, 16, 34, 0.88));
+      box-shadow: var(--card-shadow);
+      padding: clamp(1.35rem, 3vw, 2.3rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, rgba(103, 203, 255, 0.12), transparent 42%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(480px circle at var(--mx) var(--my), rgba(103, 203, 255, 0.14), transparent 62%);
+      opacity: 0.75;
+      transition: opacity 180ms ease;
+      pointer-events: none;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.78rem;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.35rem 0.68rem;
+      color: var(--muted);
+      background: rgba(8, 17, 36, 0.82);
+      font-family: "IBM Plex Mono", Consolas, monospace;
+    }
+
+    .pill strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0.15rem 0 0;
+      max-width: 16ch;
+      font-size: clamp(2rem, 6.5vw, 4.2rem);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      text-wrap: balance;
+    }
+
+    .lead {
+      margin: 1rem 0 0.2rem;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: clamp(0.98rem, 1.7vw, 1.1rem);
+      line-height: 1.62;
+    }
+
+    .projects {
+      margin-top: 1.4rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.05rem;
+      text-decoration: none;
+      color: inherit;
+      background:
+        radial-gradient(120% 100% at 100% 0%, rgba(103, 203, 255, 0.12), transparent 60%),
+        var(--surface);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+      position: relative;
+      overflow: hidden;
+      animation: rise 540ms ease both;
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 120ms;
+      background:
+        radial-gradient(120% 100% at 100% 0%, rgba(93, 240, 206, 0.13), transparent 60%),
+        var(--surface);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), transparent);
+      opacity: 0;
+      transition: opacity 220ms ease;
+    }
+
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(103, 203, 255, 0.68);
+      box-shadow: 0 0 0 1px rgba(103, 203, 255, 0.24), 0 18px 38px rgba(0, 0, 0, 0.5);
+      outline: none;
+    }
+
+    .card:hover::after,
+    .card:focus-visible::after {
+      opacity: 1;
+    }
+
+    .card-tag {
+      width: fit-content;
+      font-family: "IBM Plex Mono", Consolas, monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #b5ebff;
+      background: rgba(103, 203, 255, 0.13);
+      border: 1px solid rgba(103, 203, 255, 0.26);
+      border-radius: 999px;
+      padding: 0.28rem 0.55rem;
+    }
+
+    .card:nth-child(2) .card-tag {
+      color: #bffeed;
+      background: rgba(93, 240, 206, 0.14);
+      border-color: rgba(93, 240, 206, 0.28);
+    }
+
+    .card h2 {
+      margin: 0.7rem 0 0.45rem;
+      font-size: 1.22rem;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    .card .jump {
+      margin-top: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+
+    .footer {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed rgba(122, 156, 223, 0.26);
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .footer b {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    @media (max-width: 860px) {
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        width: min(1080px, calc(100% - 1rem));
+        margin-top: 0.8rem;
+      }
+    }
+
+    @keyframes boot {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #snake-bg,
+      .page,
+      .card {
+        animation: none;
+      }
+
+      #snake-bg {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="snake-bg" aria-hidden="true"></canvas>
+
+  <main class="page" aria-label="Personal landing page">
+    <section class="hero">
+      <div class="meta">
+        <span class="pill"><strong>Zacharie Gignac</strong></span>
+        <span class="pill">Building stuff because why not</span>
+      </div>
+
+      <h1>Practical tools and fun projects.</h1>
+      <p class="lead">
+        I build things. My projects are focused on Cisco codecs, automation, AV and making technical tasks more intuitive and efficient. I’m passionate about creating tools that solve real problems, and sometimes just for fun.
+      </p>
+
+      <div class="projects">
+        <a class="card" href="http://aes67.zachariegignac.ca" target="_blank" rel="noopener noreferrer">
+          <span class="card-tag">Web App</span>
+          <h2>Cisco Codec AES67 Manager</h2>
+          <p>
+            A purpose-built interface to configure and manage AES67 streams on Cisco codecs with clarity and simplicity.
+          </p>
+          <span class="jump">Visit aes67.zachariegignac.ca</span>
+        </a>
+
+        <a
+          class="card"
+          href="https://marketplace.visualstudio.com/items?itemName=ZacharieGignac.roomos-macros-extension"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="card-tag">VS Code Extension</span>
+          <h2>Macros Virtual Filesystem for Cisco Codecs</h2>
+          <p>
+            A VS Code extension that maps RoomOS macros as a virtual filesystem so you can edit and deploy like local code.
+          </p>
+          <span class="jump">View on Visual Studio Marketplace</span>
+        </a>
+      </div>
+
+      <div class="footer">
+        <span><b>Now</b> featured projects</span>
+        <span><b>Next</b> more tools and experiments incoming</span>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const hero = document.querySelector('.hero');
+    const snakeCanvas = document.querySelector('#snake-bg');
+
+    if (hero) {
+      hero.addEventListener('pointermove', (event) => {
+        const rect = hero.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        hero.style.setProperty('--mx', `${x}%`);
+        hero.style.setProperty('--my', `${y}%`);
+      });
+
+      hero.addEventListener('pointerleave', () => {
+        hero.style.setProperty('--mx', '50%');
+        hero.style.setProperty('--my', '50%');
+      });
+    }
+
+    if (snakeCanvas) {
+      const ctx = snakeCanvas.getContext('2d', { alpha: true });
+      const directions = [
+        { x: 1, y: 0 },
+        { x: -1, y: 0 },
+        { x: 0, y: 1 },
+        { x: 0, y: -1 }
+      ];
+      const state = {
+        dpr: Math.max(1, Math.min(window.devicePixelRatio || 1, 2)),
+        cell: 22,
+        cols: 0,
+        rows: 0,
+        snakes: [],
+        foods: [],
+        snakeCount: 3,
+        tickMs: 115,
+        lastTick: 0
+      };
+
+      function resizeSnake() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        state.dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
+        snakeCanvas.width = Math.floor(width * state.dpr);
+        snakeCanvas.height = Math.floor(height * state.dpr);
+        snakeCanvas.style.width = `${width}px`;
+        snakeCanvas.style.height = `${height}px`;
+        ctx.setTransform(state.dpr, 0, 0, state.dpr, 0, 0);
+
+        state.cols = Math.max(16, Math.floor(width / state.cell));
+        state.rows = Math.max(12, Math.floor(height / state.cell));
+
+        if (state.snakes.length === 0) {
+          resetSnakes();
+        }
+      }
+
+      function createSnake(seedX, seedY, dir, color) {
+        const snake = {
+          parts: [],
+          dir,
+          maxLength: 12,
+          color
+        };
+
+        for (let i = 0; i < 8; i += 1) {
+          snake.parts.push({ x: (seedX - i + state.cols) % state.cols, y: seedY });
+        }
+
+        return snake;
+      }
+
+      function resetSnakes() {
+        const yA = Math.floor(state.rows * 0.28);
+        const yB = Math.floor(state.rows * 0.52);
+        const yC = Math.floor(state.rows * 0.76);
+        const x = Math.floor(state.cols * 0.28);
+
+        state.snakes = [
+          createSnake(x, yA, { x: 1, y: 0 }, '103, 203, 255'),
+          createSnake(x + 8, yB, { x: 1, y: 0 }, '93, 240, 206'),
+          createSnake(x + 14, yC, { x: 1, y: 0 }, '170, 152, 255')
+        ].slice(0, state.snakeCount);
+
+        state.foods = state.snakes.map((_, index) => placeFood(index));
+      }
+
+      function placeFood(snakeIndex) {
+        const occupiedParts = state.snakes.flatMap((snake) => snake.parts);
+
+        for (let i = 0; i < 90; i += 1) {
+          const candidate = {
+            x: Math.floor(Math.random() * state.cols),
+            y: Math.floor(Math.random() * state.rows)
+          };
+          const occupied = occupiedParts.some((part) => part.x === candidate.x && part.y === candidate.y);
+          if (!occupied) {
+            return candidate;
+          }
+        }
+
+        return {
+          x: Math.floor(state.cols / 2),
+          y: Math.floor((state.rows / (state.snakeCount + 1)) * (snakeIndex + 1))
+        };
+      }
+
+      function isReverse(currentDir, nextDir) {
+        return nextDir.x === -currentDir.x && nextDir.y === -currentDir.y;
+      }
+
+      function scoreDirection(snake, food, nextDir) {
+        const head = snake.parts[0];
+        const nx = (head.x + nextDir.x + state.cols) % state.cols;
+        const ny = (head.y + nextDir.y + state.rows) % state.rows;
+
+        const allBodies = state.snakes.flatMap((item) => item.parts);
+        const willHit = allBodies.some((part) => part.x === nx && part.y === ny);
+        const distance = Math.abs(nx - food.x) + Math.abs(ny - food.y);
+        return distance + (willHit ? 999 : 0) + Math.random() * 0.6;
+      }
+
+      function chooseDirection(snake, food) {
+        const options = directions.filter((nextDir) => !isReverse(snake.dir, nextDir));
+        options.sort((a, b) => scoreDirection(snake, food, a) - scoreDirection(snake, food, b));
+        snake.dir = options[0] || snake.dir;
+      }
+
+      function updateSnakes() {
+        state.snakes.forEach((snake, index) => {
+          const food = state.foods[index];
+          chooseDirection(snake, food);
+
+          const head = snake.parts[0];
+          const nextHead = {
+            x: (head.x + snake.dir.x + state.cols) % state.cols,
+            y: (head.y + snake.dir.y + state.rows) % state.rows
+          };
+
+          const allBodies = state.snakes.flatMap((item, itemIndex) => {
+            if (itemIndex === index) {
+              return item.parts.slice(0, -1);
+            }
+            return item.parts;
+          });
+          const collision = allBodies.some((part) => part.x === nextHead.x && part.y === nextHead.y);
+
+          if (collision) {
+            const seedX = Math.floor(state.cols * (0.2 + index * 0.2));
+            const seedY = Math.floor(state.rows * (0.25 + index * 0.22));
+            state.snakes[index] = createSnake(seedX, seedY, { x: 1, y: 0 }, snake.color);
+            state.foods[index] = placeFood(index);
+            return;
+          }
+
+          snake.parts.unshift(nextHead);
+
+          const ateFood = nextHead.x === food.x && nextHead.y === food.y;
+          if (ateFood) {
+            snake.maxLength = Math.min(24, snake.maxLength + 1);
+            state.foods[index] = placeFood(index);
+          }
+
+          while (snake.parts.length > snake.maxLength) {
+            snake.parts.pop();
+          }
+        });
+      }
+
+      function drawSnakes() {
+        const width = snakeCanvas.width / state.dpr;
+        const height = snakeCanvas.height / state.dpr;
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.fillStyle = 'rgba(6, 12, 28, 0.18)';
+        ctx.fillRect(0, 0, width, height);
+
+        const foodSize = state.cell * 0.34;
+        state.foods.forEach((food, index) => {
+          const color = state.snakes[index]?.color || '103, 203, 255';
+          ctx.fillStyle = `rgba(${color}, 0.82)`;
+          ctx.fillRect(
+            food.x * state.cell + (state.cell - foodSize) / 2,
+            food.y * state.cell + (state.cell - foodSize) / 2,
+            foodSize,
+            foodSize
+          );
+        });
+
+        state.snakes.forEach((snake) => {
+          snake.parts.forEach((part, index) => {
+            const t = 1 - index / snake.parts.length;
+            const size = state.cell * (0.44 + t * 0.42);
+            const offset = (state.cell - size) / 2;
+            ctx.fillStyle = `rgba(${snake.color}, ${0.12 + t * 0.46})`;
+            ctx.fillRect(part.x * state.cell + offset, part.y * state.cell + offset, size, size);
+          });
+        });
+      }
+
+      function frame(time) {
+        if (!state.lastTick) {
+          state.lastTick = time;
+        }
+
+        if (time - state.lastTick >= state.tickMs) {
+          state.lastTick = time;
+          updateSnakes();
+        }
+
+        drawSnakes();
+        window.requestAnimationFrame(frame);
+      }
+
+      resizeSnake();
+      window.addEventListener('resize', resizeSnake);
+      window.requestAnimationFrame(frame);
+    }
+  </script>
+</body>
+</html>

@@ -34,7 +34,7 @@ const state = {
 const VU_METER_CONNECTOR_TYPE = 'Ethernet';
 const VU_METER_SOURCE = 'BeforeAEC';
 const PROTECTED_MEDIA_IPS = new Set(['239.0.1.1']);
-const PROTECTED_INPUT_MAC_PREFIXES = ['1096c6'];
+const PROTECTED_INPUT_MAC_PREFIXES = ['1096c6', 'b4cadd'];
 const PROTECTED_DEVICE_MACS = new Set([
   '01005e000101',
 ]);
