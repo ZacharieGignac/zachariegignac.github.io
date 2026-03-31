@@ -1,5 +1,169 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cisco Codec AES67 Manager - Web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-it works!
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div id="app">
+    <div id="login-screen" class="screen active">
+      <div class="login-card">
+        <h1>Cisco Codec AES67 Manager</h1>
+        <p class="sub">Login to your codec</p>
+
+        <div class="form-group">
+          <label for="device-ip">Device Hostname / IP</label>
+          <input type="text" id="device-ip" placeholder="192.168.1.100 or codec.example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="admin">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="password">
+        </div>
+
+        <button id="connect-btn">Connect</button>
+        <p id="login-error" class="error-msg"></p>
+        <p class="hint">Your codec must have web sockets enabled.</p>
+      </div>
+    </div>
+
+    <div id="dashboard-screen" class="screen">
+      <header>
+        <div class="header-left">
+          <h2>Cisco Codec AES67 Manager</h2>
+          <span class="app-meta">v1.0.0 | Zacharie Gignac</span>
+          <span class="badge connected">Connected</span>
+        </div>
+        <div class="header-right">
+          <span id="device-address"></span>
+          <button id="disconnect-btn" class="secondary-btn">Disconnect</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="card">
+          <div class="card-header">
+            <h3>Connected Input Streams</h3>
+            <button id="refresh-connected-inputs-btn" class="icon-btn" title="Refresh">Refresh</button>
+          </div>
+          <div class="table-container">
+            <table id="connected-inputs-table">
+              <thead>
+                <tr>
+                  <th>Channel</th>
+                  <th>Stream Name</th>
+                  <th>Status</th>
+                  <th>Level</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h3>Discovered Input Streams</h3>
+            <button id="refresh-inputs-btn" class="icon-btn" title="Refresh">Refresh</button>
+          </div>
+          <div class="table-container">
+            <table id="input-streams-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Media IP</th>
+                  <th>Origin IP</th>
+                  <th>Channels</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <h3>Output Streams Configuration</h3>
+            <button id="refresh-outputs-btn" class="icon-btn" title="Refresh">Refresh</button>
+          </div>
+          <div class="table-container">
+            <table id="output-streams-table">
+              <thead>
+                <tr>
+                  <th>Channel</th>
+                  <th>Name</th>
+                  <th>IP Address</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <h3>Edit Output Stream</h3>
+        <input type="hidden" id="edit-channel-id">
+        <div class="form-group">
+          <label for="edit-name">Name</label>
+          <input type="text" id="edit-name">
+        </div>
+        <div class="form-group">
+          <label>IP Address</label>
+          <div class="ip-row">
+            <span>239.69.</span>
+            <input type="number" id="edit-ip-3" min="0" max="255" placeholder="X">
+            <span>.</span>
+            <input type="number" id="edit-ip-4" min="0" max="255" placeholder="X">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button id="save-output-btn">Save</button>
+          <button id="cancel-edit-btn" class="secondary-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="dialog-modal" class="modal">
+      <div class="modal-content dialog-content">
+        <h3 id="dialog-title">Title</h3>
+        <p id="dialog-message">Message</p>
+        <div id="dialog-input-container" class="dialog-input-container">
+          <input type="text" id="dialog-input" class="dialog-input">
+        </div>
+        <div id="dialog-options-container" class="dialog-options-container"></div>
+        <div class="modal-actions">
+          <button id="dialog-ok-btn">OK</button>
+          <button id="dialog-cancel-btn" class="secondary-btn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <footer class="app-footer">
+      <p>AES67 Helper Web v1.0.0</p>
+    </footer>
+  </div>
+
+  <script src="vendor/jsxapi.min.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
