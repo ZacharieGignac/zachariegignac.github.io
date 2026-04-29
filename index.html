@@ -200,6 +200,13 @@
         var(--surface);
     }
 
+    .card:nth-child(4) {
+      animation-delay: 360ms;
+      background:
+        radial-gradient(120% 100% at 100% 0%, rgba(170, 152, 255, 0.14), transparent 60%),
+        var(--surface);
+    }
+
     .card::after {
       content: "";
       position: absolute;
@@ -246,6 +253,12 @@
       color: #ffdba0;
       background: rgba(255, 190, 85, 0.14);
       border-color: rgba(255, 190, 85, 0.28);
+    }
+
+    .card:nth-child(4) .card-tag {
+      color: #d9cfff;
+      background: rgba(170, 152, 255, 0.14);
+      border-color: rgba(170, 152, 255, 0.28);
     }
 
     .card h2 {
@@ -386,6 +399,19 @@
             A Crestron Control 4 port extender for Cisco codecs that lets RoomOS macros use a 4-series processor for serial, IR-serial, relay control, console output, and reboot through base64-encoded JSON over COM1.
           </p>
           <span class="jump">View c4x on GitHub</span>
+        </a>
+
+        <a
+          class="card"
+          href="snek/example.html"
+          rel="noopener noreferrer"
+        >
+          <span class="card-tag">Web Background</span>
+          <h2>Snek Background</h2>
+          <p>
+            A lightweight, animated snake game background for web pages. Zero dependencies, fully customizable, and respects motion preferences.
+          </p>
+          <span class="jump">View Snek Demo</span>
         </a>
       </div>
 
