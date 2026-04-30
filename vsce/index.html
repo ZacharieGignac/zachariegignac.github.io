@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macros Virtual Filesystem for Cisco Codecs - VS Code Extension</title>
+    <meta name="description" content="Develop, debug, and deploy macros for Cisco RoomOS devices directly from VS Code. Built with xAPI for seamless integration.">
+    <link rel="stylesheet" href="snek.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Snek Background -->
+    <canvas data-snek 
+            data-snek-count="5" 
+            data-snek-colors="0, 152, 255; 0, 217, 255; 0, 245, 255"
+            data-snek-speed="150"
+            aria-hidden="true"></canvas>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+                <span class="brand-name">Macros Virtual Filesystem for Cisco Codecs</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#demo">Demo</a>
+                <a href="#install" class="btn-primary">Install Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Cisco RoomOS Macros<br>
+                    <span class="gradient-text">From VS Code</span>
+                </h1>
+                <p class="hero-subtitle">
+                    No more tedious copy-pasting from the web interface. Manage all your macros with the power 
+                    of VS Code, IntelliSense, AI-assisted coding, and native debugging tools.
+                </p>
+                <div class="hero-cta">
+                    <a href="#install" class="btn-large btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        Install Extension
+                    </a>
+                    <a href="#demo" class="btn-large btn-secondary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                        Watch Demo
+                    </a>
+                </div>
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    <span>Built with Cisco xAPI</span>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="editor-mockup">
+                    <div class="editor-header">
+                        <div class="editor-dots">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="editor-title">macro - RoomOS Macros</div>
+                    </div>
+                    <div class="editor-body">
+                        <div class="code-line"><span class="keyword">import</span> xapi <span class="keyword">from</span> <span class="string">'xapi'</span>;</div>
+                        <div class="code-line"></div>
+                        <div class="code-line"><span class="comment">// Auto-answer incoming calls</span></div>
+                        <div class="code-line">xapi.Event.IncomingCallIndication.on(<span class="param">call</span> => {</div>
+                        <div class="code-line indent">  xapi.Command.Call.Accept({</div>
+                        <div class="code-line indent2">    CallId: call.CallId</div>
+                        <div class="code-line indent">  });</div>
+                        <div class="code-line">});</div>
+                    </div>
+                    <div class="editor-footer">
+                        <span class="status-indicator">●</span>
+                        <span class="status-text">Connected: 192.168.1.100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Work with the tools you already know</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </div>
+                    <h3>Virtual File System</h3>
+                    <p>Browse and edit macros directly on your Cisco devices. Real-time synchronization keeps everything in sync.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <h3>Code Acceleration</h3>
+                    <p>Right-click to insert xAPI stubs. Get instant documentation with parameter details and value ranges.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    <h3>Remote Console</h3>
+                    <p>View real-time macro output and errors directly in VS Code. Monitor your code execution without leaving your editor.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                            <line x1="12" y1="22.08" x2="12" y2="12"/>
+                        </svg>
+                    </div>
+                    <h3>AI-Assisted Coding</h3>
+                    <p>Leverage GitHub Copilot and AI agents to write macros faster with intelligent code suggestions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h3>Multiple Profiles</h3>
+                    <p>Manage fleets of devices from a single workspace. Switch between codecs with one click.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>Secure Storage</h3>
+                    <p>Credentials encrypted via VS Code's native secure storage. Your passwords stay safe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <div class="section-header">
+                <h2>See It In Action</h2>
+                <p>Watch how RoomOS Macros transforms your development workflow</p>
+            </div>
+            <div class="demo-grid">
+                <div class="demo-item" onclick="openDemoModal('../gif/insert xapi stub.gif')">
+                    <div class="demo-image">
+                        <img src="../gif/insert xapi stub.gif" alt="Insert xAPI Stub Demo">
+                    </div>
+                    <h3>Insert xAPI Stubs</h3>
+                    <p>Right-click to generate fully formatted code blocks instantly</p>
+                </div>
+                <div class="demo-item" onclick="openDemoModal('../gif/show xapi help.gif')">
+                    <div class="demo-image">
+                        <img src="../gif/show xapi help.gif" alt="xAPI Help Demo">
+                    </div>
+                    <h3>Show xAPI Help</h3>
+                    <p>Access comprehensive documentation with parameter details</p>
+                </div>
+                <div class="demo-item" onclick="openDemoModal('../gif/context-menu.gif')">
+                    <div class="demo-image">
+                        <img src="../gif/context-menu.gif" alt="Context Menu Demo">
+                    </div>
+                    <h3>Context Menu</h3>
+                    <p>All extension features accessible with a right-click</p>
+                </div>
+                <div class="demo-item" onclick="openDemoModal('../gif/ai-assisted-coding.gif')">
+                    <div class="demo-image">
+                        <img src="../gif/ai-assisted-coding.gif" alt="AI Assisted Coding Demo">
+                    </div>
+                    <h3>AI-Assisted Coding</h3>
+                    <p>GitHub Copilot and AI agents accelerate your development</p>
+                </div>
+                <div class="demo-item" onclick="openDemoModal('../gif/macro console output.gif')">
+                    <div class="demo-image">
+                        <img src="../gif/macro console output.gif" alt="Macro Console Demo">
+                    </div>
+                    <h3>Remote Console</h3>
+                    <p>Real-time macro output and error logs in VS Code</p>
+                </div>
+                <div class="demo-item" onclick="openDemoModal('../gif/extension-settings-page.gif')">
+                    <div class="demo-image">
+                        <img src="../gif/extension-settings-page.gif" alt="Settings Demo">
+                    </div>
+                    <h3>Profile Management</h3>
+                    <p>Configure and manage multiple device profiles easily</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Modal -->
+    <div id="demoModal" class="demo-modal" onclick="closeDemoModal()">
+        <div class="demo-modal-content">
+            <button class="modal-close" onclick="closeDemoModal()">&times;</button>
+            <img id="modalImage" src="" alt="Demo">
+        </div>
+    </div>
+
+    <!-- Installation Section -->
+    <section id="install" class="install">
+        <div class="container">
+            <div class="install-content">
+                <h2>Get Started in Minutes</h2>
+                <p class="install-subtitle">Install from VS Code Marketplace</p>
+                <div class="install-methods">
+                    <div class="install-card">
+                        <div class="install-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            </svg>
+                        </div>
+                        <h3>VS Code Marketplace</h3>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=ZacharieGignac.roomos-macros-extension" class="btn-install" target="_blank" rel="noopener">Open Marketplace</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="snek.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

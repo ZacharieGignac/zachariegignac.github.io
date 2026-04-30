@@ -16,17 +16,17 @@
   />
   <style>
     :root {
-      --bg-0: #070b14;
-      --bg-1: #101a33;
-      --surface: rgba(11, 20, 42, 0.78);
-      --surface-2: rgba(8, 15, 31, 0.88);
-      --line: rgba(142, 175, 238, 0.24);
-      --text: #e7efff;
-      --muted: #9badcc;
-      --primary: #67cbff;
-      --secondary: #5df0ce;
+      --bg-0: #0a0a0a;
+      --bg-1: #121212;
+      --surface: rgba(18, 18, 18, 0.78);
+      --surface-2: rgba(12, 12, 12, 0.88);
+      --line: rgba(60, 60, 60, 0.35);
+      --text: #e8e8e8;
+      --muted: #999999;
+      --primary: #b8b8b8;
+      --secondary: #888888;
       --radius: 20px;
-      --card-shadow: 0 20px 46px rgba(0, 0, 0, 0.46);
+      --card-shadow: 0 20px 46px rgba(0, 0, 0, 0.7);
     }
 
     * {
@@ -43,8 +43,8 @@
       font-family: "Outfit", "Segoe UI", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(1000px 500px at 12% -6%, rgba(103, 203, 255, 0.17), transparent 60%),
-        radial-gradient(850px 420px at 94% 0%, rgba(93, 240, 206, 0.14), transparent 58%),
+        radial-gradient(1000px 500px at 12% -6%, rgba(40, 40, 40, 0.15), transparent 60%),
+        radial-gradient(850px 420px at 94% 0%, rgba(30, 30, 30, 0.12), transparent 58%),
         linear-gradient(140deg, var(--bg-0) 0%, var(--bg-1) 100%);
       overflow-x: hidden;
       position: relative;
@@ -65,8 +65,8 @@
       inset: 0;
       z-index: -3;
       background-image:
-        linear-gradient(rgba(126, 154, 212, 0.09) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(126, 154, 212, 0.09) 1px, transparent 1px);
+        linear-gradient(rgba(50, 50, 50, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(50, 50, 50, 0.06) 1px, transparent 1px);
       background-size: 58px 58px;
       mask-image: radial-gradient(circle at center, black 24%, transparent 82%);
       pointer-events: none;
@@ -81,9 +81,9 @@
       bottom: -120px;
       border-radius: 999px;
       z-index: -2;
-      background: radial-gradient(circle at center, rgba(103, 203, 255, 0.42), rgba(93, 240, 206, 0.06));
+      background: radial-gradient(circle at center, rgba(50, 50, 50, 0.25), rgba(30, 30, 30, 0.05));
       filter: blur(48px);
-      opacity: 0.8;
+      opacity: 0.6;
       pointer-events: none;
     }
 
@@ -98,7 +98,7 @@
       --my: 50%;
       border: 1px solid var(--line);
       border-radius: calc(var(--radius) + 4px);
-      background: linear-gradient(180deg, rgba(14, 26, 54, 0.8), rgba(9, 16, 34, 0.88));
+      background: linear-gradient(180deg, rgba(22, 22, 22, 0.8), rgba(15, 15, 15, 0.88));
       box-shadow: var(--card-shadow);
       padding: clamp(1.35rem, 3vw, 2.3rem);
       position: relative;
@@ -109,7 +109,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(115deg, rgba(103, 203, 255, 0.12), transparent 42%);
+      background: linear-gradient(115deg, rgba(45, 45, 45, 0.08), transparent 42%);
       pointer-events: none;
     }
 
@@ -117,7 +117,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(480px circle at var(--mx) var(--my), rgba(103, 203, 255, 0.14), transparent 62%);
+      background: radial-gradient(480px circle at var(--mx) var(--my), rgba(50, 50, 50, 0.12), transparent 62%);
       opacity: 0.75;
       transition: opacity 180ms ease;
       pointer-events: none;
@@ -136,7 +136,7 @@
       border-radius: 999px;
       padding: 0.35rem 0.68rem;
       color: var(--muted);
-      background: rgba(8, 17, 36, 0.82);
+      background: rgba(18, 18, 18, 0.82);
       font-family: "IBM Plex Mono", Consolas, monospace;
     }
 
@@ -177,9 +177,9 @@
       text-decoration: none;
       color: inherit;
       background:
-        radial-gradient(120% 100% at 100% 0%, rgba(103, 203, 255, 0.12), transparent 60%),
+        radial-gradient(120% 100% at 100% 0%, rgba(40, 40, 40, 0.08), transparent 60%),
         var(--surface);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
       transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
       position: relative;
       overflow: hidden;
@@ -189,21 +189,21 @@
     .card:nth-child(2) {
       animation-delay: 120ms;
       background:
-        radial-gradient(120% 100% at 100% 0%, rgba(93, 240, 206, 0.13), transparent 60%),
+        radial-gradient(120% 100% at 100% 0%, rgba(45, 45, 45, 0.08), transparent 60%),
         var(--surface);
     }
 
     .card:nth-child(3) {
       animation-delay: 240ms;
       background:
-        radial-gradient(120% 100% at 100% 0%, rgba(255, 190, 85, 0.14), transparent 60%),
+        radial-gradient(120% 100% at 100% 0%, rgba(50, 50, 50, 0.08), transparent 60%),
         var(--surface);
     }
 
     .card:nth-child(4) {
       animation-delay: 360ms;
       background:
-        radial-gradient(120% 100% at 100% 0%, rgba(170, 152, 255, 0.14), transparent 60%),
+        radial-gradient(120% 100% at 100% 0%, rgba(35, 35, 35, 0.08), transparent 60%),
         var(--surface);
     }
 
@@ -220,8 +220,8 @@
     .card:hover,
     .card:focus-visible {
       transform: translateY(-4px);
-      border-color: rgba(103, 203, 255, 0.68);
-      box-shadow: 0 0 0 1px rgba(103, 203, 255, 0.24), 0 18px 38px rgba(0, 0, 0, 0.5);
+      border-color: rgba(120, 120, 120, 0.55);
+      box-shadow: 0 0 0 1px rgba(80, 80, 80, 0.3), 0 18px 38px rgba(0, 0, 0, 0.7);
       outline: none;
     }
 
@@ -236,29 +236,29 @@
       font-size: 0.74rem;
       letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: #b5ebff;
-      background: rgba(103, 203, 255, 0.13);
-      border: 1px solid rgba(103, 203, 255, 0.26);
+      color: #c0c0c0;
+      background: rgba(60, 60, 60, 0.3);
+      border: 1px solid rgba(80, 80, 80, 0.4);
       border-radius: 999px;
       padding: 0.28rem 0.55rem;
     }
 
     .card:nth-child(2) .card-tag {
-      color: #bffeed;
-      background: rgba(93, 240, 206, 0.14);
-      border-color: rgba(93, 240, 206, 0.28);
+      color: #b8b8b8;
+      background: rgba(60, 60, 60, 0.3);
+      border-color: rgba(80, 80, 80, 0.4);
     }
 
     .card:nth-child(3) .card-tag {
-      color: #ffdba0;
-      background: rgba(255, 190, 85, 0.14);
-      border-color: rgba(255, 190, 85, 0.28);
+      color: #b0b0b0;
+      background: rgba(60, 60, 60, 0.3);
+      border-color: rgba(80, 80, 80, 0.4);
     }
 
     .card:nth-child(4) .card-tag {
-      color: #d9cfff;
-      background: rgba(170, 152, 255, 0.14);
-      border-color: rgba(170, 152, 255, 0.28);
+      color: #a8a8a8;
+      background: rgba(60, 60, 60, 0.3);
+      border-color: rgba(80, 80, 80, 0.4);
     }
 
     .card h2 {
@@ -288,7 +288,7 @@
     .footer {
       margin-top: 1rem;
       padding-top: 0.8rem;
-      border-top: 1px dashed rgba(122, 156, 223, 0.26);
+      border-top: 1px dashed rgba(80, 80, 80, 0.3);
       display: flex;
       justify-content: space-between;
       gap: 0.75rem;
@@ -375,7 +375,7 @@
 
         <a
           class="card"
-          href="https://marketplace.visualstudio.com/items?itemName=ZacharieGignac.roomos-macros-extension"
+          href="https://vsce.zachariegignac.ca"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -384,7 +384,7 @@
           <p>
             A VS Code extension that maps RoomOS macros as a virtual filesystem so you can edit and deploy like local code.
           </p>
-          <span class="jump">View on Visual Studio Marketplace</span>
+          <span class="jump">Visit vsce.zachariegignac.ca</span>
         </a>
 
         <a
@@ -501,9 +501,9 @@
         const x = Math.floor(state.cols * 0.28);
 
         state.snakes = [
-          createSnake(x, yA, { x: 1, y: 0 }, '103, 203, 255'),
-          createSnake(x + 8, yB, { x: 1, y: 0 }, '93, 240, 206'),
-          createSnake(x + 14, yC, { x: 1, y: 0 }, '170, 152, 255')
+          createSnake(x, yA, { x: 1, y: 0 }, '100, 100, 100'),
+          createSnake(x + 8, yB, { x: 1, y: 0 }, '120, 120, 120'),
+          createSnake(x + 14, yC, { x: 1, y: 0 }, '80, 80, 80')
         ].slice(0, state.snakeCount);
 
         state.foods = state.snakes.map((_, index) => placeFood(index));
@@ -596,12 +596,12 @@
         const height = snakeCanvas.height / state.dpr;
         ctx.clearRect(0, 0, width, height);
 
-        ctx.fillStyle = 'rgba(6, 12, 28, 0.18)';
+        ctx.fillStyle = 'rgba(8, 8, 8, 0.18)';
         ctx.fillRect(0, 0, width, height);
 
         const foodSize = state.cell * 0.34;
         state.foods.forEach((food, index) => {
-          const color = state.snakes[index]?.color || '103, 203, 255';
+          const color = state.snakes[index]?.color || '100, 100, 100';
           ctx.fillStyle = `rgba(${color}, 0.82)`;
           ctx.fillRect(
             food.x * state.cell + (state.cell - foodSize) / 2,
