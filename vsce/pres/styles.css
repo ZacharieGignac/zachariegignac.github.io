@@ -419,7 +419,7 @@ kbd {
     position: absolute;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+    background: transparent;
     top: 50%;
     z-index: -1;
 }
@@ -490,7 +490,7 @@ kbd {
 .data-flow-horizontal {
     width: 150px;
     height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    background: transparent;
     position: relative;
     border-radius: 2px;
     margin: 0;
@@ -498,23 +498,163 @@ kbd {
 
 .particle-horizontal {
     position: absolute;
-    top: -4px;
-    width: 12px;
-    height: 12px;
-    background: var(--accent);
+    top: -3px;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 245, 255, 0.6), rgba(0, 217, 255, 0.4));
     border-radius: 50%;
-    animation: particleFlowHorizontal 2s ease-in-out infinite;
-    box-shadow: 0 0 15px var(--accent);
+    animation: particleFlowHorizontal 2.5s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    box-shadow: 
+        0 0 8px rgba(0, 245, 255, 0.4),
+        0 0 15px rgba(0, 245, 255, 0.2);
+    filter: blur(0.3px);
+}
+
+.particle-horizontal::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+.particle-horizontal::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle, rgba(0, 245, 255, 0.15), transparent 70%);
+    border-radius: 50%;
+    animation: particlePulse 1s ease-in-out infinite;
 }
 
 @keyframes particleFlowHorizontal {
     0% {
-        left: 0;
+        left: -20px;
+        opacity: 0;
+        transform: scale(0.5) translateY(0px);
+    }
+    10% {
         opacity: 1;
+        transform: scale(1) translateY(0px);
+    }
+    30% {
+        transform: scale(1.1) translateY(-2px);
+    }
+    50% {
+        transform: scale(1) translateY(2px);
+    }
+    70% {
+        transform: scale(1.05) translateY(-1px);
+    }
+    85% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
     }
     100% {
-        left: 100%;
+        left: calc(100% + 20px);
         opacity: 0;
+        transform: scale(0.7) translateY(1px);
+    }
+}
+
+@keyframes particlePulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.15;
+    }
+}
+
+/* Reverse horizontal data flow (coming back) */
+.data-flow-horizontal-reverse {
+    width: 150px;
+    height: 4px;
+    background: transparent;
+    position: relative;
+    border-radius: 2px;
+    margin: 0;
+    margin-top: 8px;
+}
+
+.particle-horizontal-reverse {
+    position: absolute;
+    top: -3px;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 230, 118, 0.6), rgba(0, 200, 100, 0.4));
+    border-radius: 50%;
+    animation: particleFlowHorizontalReverse 2.5s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    box-shadow: 
+        0 0 8px rgba(0, 230, 118, 0.4),
+        0 0 15px rgba(0, 230, 118, 0.2);
+    filter: blur(0.3px);
+}
+
+.particle-horizontal-reverse::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
+
+.particle-horizontal-reverse::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle, rgba(0, 230, 118, 0.15), transparent 70%);
+    border-radius: 50%;
+    animation: particlePulse 1s ease-in-out infinite;
+}
+
+@keyframes particleFlowHorizontalReverse {
+    0% {
+        left: calc(100% + 20px);
+        opacity: 0;
+        transform: scale(0.5) translateY(0px);
+    }
+    10% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+    }
+    30% {
+        transform: scale(1.1) translateY(2px);
+    }
+    50% {
+        transform: scale(1) translateY(-2px);
+    }
+    70% {
+        transform: scale(1.05) translateY(1px);
+    }
+    85% {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+    }
+    100% {
+        left: -20px;
+        opacity: 0;
+        transform: scale(0.7) translateY(-1px);
     }
 }
 

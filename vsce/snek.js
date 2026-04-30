@@ -8,6 +8,22 @@ class SnekBackground {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: true });
     
+    // JavaScript code snippets for snake segments
+    this.codeSnippets = [
+      'xapi.Event.CallDisconnect.on(call => {',
+      'import xapi from "xapi"; console.log("ready");',
+      'async function handleEvent(event) { await process(); }',
+      'const config = await xapi.Config.Audio.DefaultVolume.get();',
+      'xapi.Command.UserInterface.Message.Alert.Display({',
+      'if (status.Call[0]) { console.log("In call"); }',
+      'export default { init: () => xapi.Event.on(handler) };',
+      'try { await xapi.Command.Call.Accept({ CallId: id }); }',
+      'let volume = 50; xapi.Config.Audio.DefaultVolume.set(volume);',
+      'switch (state) { case "Connected": handleCall(); break; }',
+      'for (let i = 0; i < devices.length; i++) { connect(i); }',
+      'const result = await xapi.Status.SystemUnit.State.NumberOfActiveCalls.get();',
+    ];
+    
     // Default options
     this.options = {
       snakeCount: 10,
@@ -81,11 +97,17 @@ class SnekBackground {
       parts: [],
       dir,
       maxLength: 12,
-      color
+      color,
+      codeSnippet: this.codeSnippets[Math.floor(Math.random() * this.codeSnippets.length)],
+      charIndex: 0
     };
 
     for (let i = 0; i < 8; i += 1) {
-      snake.parts.push({ x: (seedX - i + this.state.cols) % this.state.cols, y: seedY });
+      snake.parts.push({ 
+        x: (seedX - i + this.state.cols) % this.state.cols, 
+        y: seedY,
+        charIndex: i % snake.codeSnippet.length
+      });
     }
 
     return snake;
@@ -155,7 +177,8 @@ class SnekBackground {
       const head = snake.parts[0];
       const nextHead = {
         x: (head.x + snake.dir.x + this.state.cols) % this.state.cols,
-        y: (head.y + snake.dir.y + this.state.rows) % this.state.rows
+        y: (head.y + snake.dir.y + this.state.rows) % this.state.rows,
+        charIndex: (snake.charIndex) % snake.codeSnippet.length
       };
 
       const allBodies = this.state.snakes.flatMap((item, itemIndex) => {
@@ -175,6 +198,7 @@ class SnekBackground {
       }
 
       snake.parts.unshift(nextHead);
+      snake.charIndex = (snake.charIndex + 1) % snake.codeSnippet.length;
 
       const ateFood = nextHead.x === food.x && nextHead.y === food.y;
       if (ateFood) {
@@ -193,25 +217,54 @@ class SnekBackground {
     const height = this.canvas.height / this.state.dpr;
     this.ctx.clearRect(0, 0, width, height);
 
+    // Draw food as small dots
     const foodSize = this.state.cell * 0.34;
     this.state.foods.forEach((food, index) => {
       const color = this.state.snakes[index]?.color || '103, 203, 255';
-      this.ctx.fillStyle = `rgba(${color}, 1)`;
-      this.ctx.fillRect(
-        food.x * this.state.cell + (this.state.cell - foodSize) / 2,
-        food.y * this.state.cell + (this.state.cell - foodSize) / 2,
+      this.ctx.fillStyle = `rgba(${color}, 0.6)`;
+      this.ctx.beginPath();
+      this.ctx.arc(
+        food.x * this.state.cell + this.state.cell / 2,
+        food.y * this.state.cell + this.state.cell / 2,
         foodSize,
-        foodSize
+        0,
+        Math.PI * 2
       );
+      this.ctx.fill();
     });
+
+    // Set font for code characters
+    this.ctx.font = `900 ${this.state.cell * 1.1}px 'Consolas', 'Monaco', 'Courier New', monospace`;
+    this.ctx.textAlign = 'center';
+    this.ctx.textBaseline = 'middle';
 
     this.state.snakes.forEach((snake) => {
       snake.parts.forEach((part, index) => {
         const t = 1 - index / snake.parts.length;
-        const size = this.state.cell * (0.44 + t * 0.42);
-        const offset = (this.state.cell - size) / 2;
-        this.ctx.fillStyle = `rgba(${snake.color}, ${0.5 + t * 0.5})`;
-        this.ctx.fillRect(part.x * this.state.cell + offset, part.y * this.state.cell + offset, size, size);
+        const opacity = 0.85 + t * 0.15;
+        
+        // Get the character for this segment
+        const char = snake.codeSnippet[part.charIndex] || ' ';
+        
+        const x = part.x * this.state.cell + this.state.cell / 2;
+        const y = part.y * this.state.cell + this.state.cell / 2;
+        
+        // Draw outline/stroke for extra visibility
+        this.ctx.strokeStyle = `rgba(${snake.color}, ${opacity})`;
+        this.ctx.lineWidth = 3;
+        this.ctx.strokeText(char, x, y);
+        
+        // Draw with strong glow
+        this.ctx.fillStyle = `rgba(${snake.color}, ${opacity})`;
+        this.ctx.shadowColor = `rgba(${snake.color}, 1)`;
+        this.ctx.shadowBlur = 20;
+        
+        // Draw character multiple times for maximum boldness
+        this.ctx.fillText(char, x, y);
+        this.ctx.fillText(char, x, y);
+        this.ctx.fillText(char, x, y);
+        
+        this.ctx.shadowBlur = 0;
       });
     });
   }
