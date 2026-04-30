@@ -242,11 +242,13 @@
                             </div>
                             <div class="help-content">
                                 <div class="help-header">Video.Matrix.Assign(args)</div>
-                                <p class="help-desc">Assigns a video source to a video output.</p>
+                                <p class="help-desc">Assigns video sources to an output to make simple video compositions.</p>
                                 <div class="param-list">
-                                    <div class="param"><strong>Output:</strong> Integer, required (1-3)</div>
-                                    <div class="param"><strong>Source:</strong> Integer, required (1-3)</div>
-                                    <div class="param"><strong>Mode:</strong> String, optional ('Manual', 'Auto')</div>
+                                    <div class="param"><strong>Output:</strong> Number, required (1-2)</div>
+                                    <div class="param"><strong>SourceId:</strong> Number, optional (1-5, up to 4 sources)</div>
+                                    <div class="param"><strong>Layout:</strong> String, optional ('Equal', 'Prominent')</div>
+                                    <div class="param"><strong>Mode:</strong> String, optional ('Add', 'Replace')</div>
+                                    <div class="param"><strong>RemoteMain:</strong> Number, optional (1-4)</div>
                                 </div>
                             </div>
                         </div>
