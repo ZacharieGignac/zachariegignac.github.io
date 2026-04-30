@@ -1,0 +1,945 @@
+/* Print-Specific Styles for RoomOS Macros Presentation - Black & White High Contrast */
+
+:root {
+    --print-primary: #000000;
+    --print-secondary: #333333;
+    --print-accent: #000000;
+    --print-dark: #000000;
+    --print-gray-dark: #333333;
+    --print-gray: #666666;
+    --print-gray-light: #CCCCCC;
+    --print-background: #FFFFFF;
+    --print-code-bg: #F5F5F5;
+    --print-border: #999999;
+}
+
+/* Print Media Query */
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 1.5cm 2cm;
+    }
+    
+    body {
+        background: white !important;
+    }
+    
+    .slide {
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+    
+    .slide:last-child {
+        page-break-after: auto;
+    }
+    
+    * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* Screen styles for print-mode preview */
+body.print-mode {
+    background: #FFFFFF;
+    overflow-y: auto;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    color: var(--print-dark);
+}
+
+body.print-mode .slides-container {
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding: 2rem 0;
+}
+
+/* Redesigned Slide Cards */
+body.print-mode .slide {
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+    display: block;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto 3rem auto;
+    background: white;
+    box-shadow: none;
+    border-radius: 0;
+    page-break-after: always;
+    page-break-inside: avoid;
+    border: 3px solid var(--print-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+body.print-mode .slide::before {
+    display: none;
+}
+
+body.print-mode .slide.print-slide {
+    min-height: 650px;
+    padding: 3rem 4rem;
+}
+
+body.print-mode .slide-background {
+    display: none;
+}
+
+body.print-mode .slide-content {
+    max-width: 100%;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Add slide number in corner */
+body.print-mode .slide::after {
+    content: attr(data-slide);
+    position: absolute;
+    bottom: 1.5rem;
+    right: 2rem;
+    font-size: 0.875rem;
+    color: var(--print-gray);
+    font-weight: 600;
+}
+
+/* Hide navigation and interactive elements */
+body.print-mode .slide-nav,
+body.print-mode .slide-counter,
+body.print-mode .interactive-hint {
+    display: none !important;
+}
+
+/* Disable animations */
+body.print-mode .animate-in,
+body.print-mode .data-flow-horizontal,
+body.print-mode .data-flow-horizontal-reverse,
+body.print-mode .particle-horizontal,
+body.print-mode .particle-horizontal-reverse {
+    animation: none !important;
+    opacity: 1 !important;
+}
+
+/* Hide animated particles */
+body.print-mode .particle-horizontal,
+body.print-mode .particle-horizontal-reverse {
+    display: none;
+}
+
+/* Simplify colors for print */
+body.print-mode .gradient-text {
+    color: var(--print-primary);
+    font-weight: 800;
+}
+
+body.print-mode code {
+    background: var(--print-code-bg);
+    color: var(--print-dark);
+    padding: 2px 6px;
+    border-radius: 0;
+    border: 1px solid var(--print-border);
+    font-weight: 600;
+}
+
+/* Typography - Modern & Clean */
+body.print-mode .slide-title {
+    color: var(--print-dark);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+body.print-mode .slide-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--print-primary);
+    border-radius: 0;
+}
+
+body.print-mode .slide-subtitle {
+    color: var(--print-gray-dark);
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+body.print-mode .title-main {
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1.2;
+    color: var(--print-dark);
+    margin-bottom: 1.5rem;
+}
+
+body.print-mode .subtitle {
+    font-size: 1.125rem;
+    color: var(--print-gray-dark);
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+body.print-mode .gradient-text {
+    color: var(--print-primary);
+    font-weight: 800;
+}
+
+body.print-mode h3 {
+    color: var(--print-dark);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+
+body.print-mode h4 {
+    color: var(--print-dark);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+body.print-mode p {
+    color: var(--print-gray-dark);
+    line-height: 1.7;
+}
+
+body.print-mode code {
+    background: var(--print-code-bg);
+    color: var(--print-primary);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+    border: 1px solid var(--print-gray-light);
+    font-weight: 500;
+}
+
+/* Architecture Diagram - Card Layout */
+body.print-mode .architecture-interactive {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 3rem;
+    margin: 2.5rem 0;
+}
+
+body.print-mode .env-card {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    padding: 2rem;
+    box-shadow: none;
+}
+
+body.print-mode .env-card h3 {
+    color: var(--print-primary);
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    font-weight: 800;
+}
+
+body.print-mode .arch-connector-interactive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+body.print-mode .protocol-badge {
+    background: var(--print-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0;
+    font-family: 'Consolas', monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: none;
+    border: 3px solid var(--print-primary);
+}
+
+body.print-mode .protocol-badge.pulsing {
+    animation: none !important;
+}
+
+body.print-mode .connection-status {
+    background: white;
+    color: var(--print-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 0.875rem;
+    border: 2px dashed var(--print-primary);
+}
+
+/* Cisco Device Styling */
+body.print-mode .device-body {
+    background: var(--print-code-bg);
+    border: 3px solid var(--print-primary);
+    box-shadow: none;
+}
+
+body.print-mode .status-lights .light {
+    background: white;
+    border: 2px solid var(--print-gray);
+}
+
+body.print-mode .status-lights .light.active {
+    background: var(--print-primary);
+    border: 2px solid var(--print-primary);
+    box-shadow: none;
+}
+
+/* File List */
+body.print-mode .file-list {
+    margin-top: 1.5rem;
+}
+
+body.print-mode .file-item {
+    background: white;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--print-gray-light);
+    font-size: 0.95rem;
+    color: var(--print-gray-dark);
+}
+
+/* Workflow Stages - Modern Cards */
+body.print-mode .workflow-interactive {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+body.print-mode .workflow-stage {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: none;
+    position: relative;
+    overflow: hidden;
+}
+
+body.print-mode .workflow-stage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--print-primary);
+}
+
+body.print-mode .workflow-stage .stage-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--print-primary);
+}
+
+body.print-mode .workflow-stage h4 {
+    font-size: 1.125rem;
+    color: var(--print-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+body.print-mode .workflow-stage p {
+    font-size: 0.875rem;
+    color: var(--print-gray);
+}
+
+body.print-mode .workflow-stage .keyboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+body.print-mode .workflow-stage .key {
+    background: var(--print-code-bg);
+    border: 2px solid var(--print-border);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    color: var(--print-dark);
+    font-size: 1.125rem;
+}
+
+/* xAPI Demo Grid - Color-Coded Cards */
+body.print-mode .xapi-demo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+body.print-mode .xapi-category {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    padding: 2rem;
+}
+
+body.print-mode .xapi-category[data-category="status"] {
+    border-style: solid;
+}
+
+body.print-mode .xapi-category[data-category="config"] {
+    border-style: dashed;
+}
+
+body.print-mode .xapi-category[data-category="event"] {
+    border-style: dotted;
+}
+
+body.print-mode .category-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+body.print-mode .category-icon {
+    font-size: 2rem;
+    color: var(--print-primary);
+}
+
+body.print-mode .code-example {
+    background: var(--print-code-bg);
+    border: 1px solid var(--print-border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.95rem;
+    color: var(--print-dark);
+    overflow-x: auto;
+}
+
+body.print-mode .code-example code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* Demo Cards - Two Column Layout */
+body.print-mode .demo-sections-redesign {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin: 2.5rem 0;
+}
+
+body.print-mode .demo-card {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    padding: 2rem;
+    box-shadow: none;
+}
+
+body.print-mode .demo-card::before {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--print-primary);
+    border-radius: 0;
+    margin-bottom: 1.5rem;
+}
+
+body.print-mode .card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+body.print-mode .card-icon {
+    font-size: 2rem;
+    color: var(--print-primary);
+}
+
+body.print-mode .card-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--print-dark);
+}
+
+body.print-mode .card-description {
+    color: var(--print-gray);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* Stub Demo */
+body.print-mode .stub-demo-compact {
+    margin-top: 1.5rem;
+}
+
+body.print-mode .code-editor-small {
+    background: var(--print-code-bg);
+    border: 1px solid var(--print-border);
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    color: var(--print-dark);
+    margin-bottom: 1rem;
+}
+
+body.print-mode .arrow-down {
+    text-align: center;
+    color: var(--print-primary);
+    font-weight: 600;
+    margin: 1rem 0;
+    font-size: 0.875rem;
+}
+
+body.print-mode .code-editor-small.result {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-left: 5px solid var(--print-primary);
+}
+
+body.print-mode .code-line {
+    padding: 0.25rem 0;
+    line-height: 1.6;
+}
+
+body.print-mode .code-line.indent {
+    padding-left: 2rem;
+}
+
+body.print-mode .code-line.indent2 {
+    padding-left: 4rem;
+}
+
+/* Help Demo */
+body.print-mode .help-content {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-left: 5px solid var(--print-primary);
+    border-radius: 0;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+body.print-mode .help-header {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--print-primary);
+    margin-bottom: 0.75rem;
+    font-family: 'Consolas', monospace;
+}
+
+body.print-mode .help-desc {
+    color: var(--print-gray-dark);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+body.print-mode .param-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+body.print-mode .param {
+    background: var(--print-code-bg);
+    padding: 0.75rem 1rem;
+    border-radius: 0;
+    border-left: 4px solid var(--print-primary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border: 1px solid var(--print-border);
+}
+
+body.print-mode .param strong {
+    color: var(--print-primary);
+    font-weight: 700;
+}
+
+/* Debugging Demo - Split View */
+body.print-mode .debugging-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+body.print-mode .code-panel,
+body.print-mode .log-panel {
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: none;
+}
+
+body.print-mode .panel-header {
+    background: var(--print-primary);
+    color: white;
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+body.print-mode .code-content,
+body.print-mode .log-content {
+    background: var(--print-code-bg);
+    padding: 1.5rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+}
+
+body.print-mode .code-line {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+body.print-mode .line-num {
+    color: var(--print-gray);
+    min-width: 30px;
+    text-align: right;
+    font-weight: 600;
+}
+
+body.print-mode .code-line.highlight {
+    background: var(--print-code-bg);
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-left: 4px solid var(--print-primary);
+}
+
+body.print-mode .keyword {
+    color: var(--print-primary);
+    font-weight: 800;
+}
+
+body.print-mode .function {
+    color: var(--print-primary);
+    font-weight: 700;
+}
+
+body.print-mode .object {
+    color: var(--print-dark);
+    font-weight: 600;
+}
+
+body.print-mode .method {
+    color: var(--print-primary);
+    font-weight: 700;
+}
+
+body.print-mode .string {
+    color: var(--print-gray-dark);
+    font-style: italic;
+}
+
+/* Log Entries */
+body.print-mode .log-entry {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--print-gray-light);
+    font-size: 0.85rem;
+    align-items: flex-start;
+}
+
+body.print-mode .log-entry:last-child {
+    border-bottom: none;
+}
+
+body.print-mode .log-entry.active {
+    background: var(--print-code-bg);
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-left: 4px solid var(--print-primary);
+}
+
+body.print-mode .timestamp {
+    color: var(--print-gray);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+body.print-mode .log-level {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+body.print-mode .log-level.info {
+    color: var(--print-primary);
+    font-weight: 700;
+}
+
+body.print-mode .log-level.success {
+    color: var(--print-dark);
+    font-weight: 800;
+}
+
+body.print-mode .message {
+    color: var(--print-gray-dark);
+    flex: 1;
+}
+
+/* Fleet Management - Profiles Display */
+body.print-mode .fleet-demo-compact {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 2.5rem;
+    margin: 2.5rem 0;
+}
+
+body.print-mode .profiles-list {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    padding: 2rem;
+}
+
+body.print-mode .profiles-list h4 {
+    color: var(--print-dark);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+body.print-mode .profile-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--print-code-bg);
+    border: 2px solid var(--print-border);
+    border-radius: 0;
+    margin-bottom: 0.75rem;
+    transition: none;
+}
+
+body.print-mode .profile-item.active {
+    background: var(--print-code-bg);
+    border: 3px solid var(--print-primary);
+    border-left: 6px solid var(--print-primary);
+}
+
+body.print-mode .status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--print-gray);
+    flex-shrink: 0;
+}
+
+body.print-mode .status-dot.active {
+    background: var(--print-primary);
+    border: 2px solid var(--print-primary);
+    box-shadow: none;
+}
+
+body.print-mode .profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+body.print-mode .profile-name {
+    font-weight: 700;
+    color: var(--print-dark);
+    font-size: 0.95rem;
+}
+
+body.print-mode .profile-ip {
+    font-family: 'Consolas', monospace;
+    color: var(--print-gray);
+    font-size: 0.85rem;
+}
+
+body.print-mode .profile-form-compact {
+    background: white;
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    padding: 2rem;
+}
+
+body.print-mode .profile-form-compact h3 {
+    color: var(--print-dark);
+    margin-bottom: 1rem;
+}
+
+body.print-mode .form-description {
+    color: var(--print-gray);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+
+body.print-mode .security-note {
+    background: var(--print-code-bg);
+    color: var(--print-dark);
+    padding: 1rem;
+    border-radius: 0;
+    font-size: 0.875rem;
+    text-align: center;
+    border: 2px dashed var(--print-primary);
+    font-weight: 700;
+}
+
+/* Safety features */
+body.print-mode .safety-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+body.print-mode .safety-card {
+    border: 2px solid var(--print-primary);
+    border-radius: 0;
+    padding: 1.5rem;
+    background: white;
+}
+
+/* Quick start timeline */
+body.print-mode .quickstart-timeline {
+    margin: 2rem 0;
+}
+
+body.print-mode .timeline-step {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+body.print-mode .timeline-connector {
+    display: none;
+}
+
+body.print-mode .step-circle {
+    min-width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--print-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid var(--print-primary);
+}
+
+body.print-mode .step-number {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+/* Final slide adjustments */
+body.print-mode .final-slide {
+    text-align: center;
+}
+
+body.print-mode .final-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+body.print-mode .download-section {
+    margin: 2rem 0;
+}
+
+body.print-mode .download-text {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+body.print-mode .download-link {
+    font-family: monospace;
+    background: var(--print-code-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 0;
+    display: inline-block;
+    font-size: 0.9rem;
+    border: 2px solid var(--print-primary);
+    font-weight: 700;
+}
+
+/* Remove button styles */
+body.print-mode .download-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--print-primary);
+    font-weight: 800;
+    border-bottom: 2px solid var(--print-primary);
+}
+
+/* Simplify SVG icons for print */
+body.print-mode svg {
+    display: none;
+}
+
+body.print-mode .stage-icon,
+body.print-mode .safety-icon,
+body.print-mode .category-icon {
+    font-size: 2rem;
+}
+
+/* Hide GIF demos - they won't print anyway */
+body.print-mode .demo-container,
+body.print-mode .demo-gif {
+    display: none;
+}
+
+/* Simplify form elements */
+body.print-mode input,
+body.print-mode select,
+body.print-mode button {
+    border: 2px solid var(--print-primary);
+    padding: 0.5rem;
+    border-radius: 0;
+    background: white;
+    color: var(--print-dark);
+}
+
+/* Print-specific adjustments */
+@media print {
+    body.print-mode .slide {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    body.print-mode .slide-content {
+        padding: 0.5rem;
+    }
+    
+    body.print-mode .slide-title {
+        font-size: 1.5rem;
+    }
+    
+    body.print-mode .final-title {
+        font-size: 2rem;
+    }
+}

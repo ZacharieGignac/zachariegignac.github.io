@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoomOS Macros - Printable Version</title>
+    <link rel="stylesheet" href="../pres/styles.css">
+    <link rel="stylesheet" href="print-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="print-mode">
+    <!-- Slide Container -->
+    <div class="slides-container">
+        
+        <!-- Slide 1: Hero / Title -->
+        <div class="slide print-slide" data-slide="1">
+            <div class="slide-content">
+                <div class="hero-logo">
+                    <div class="logo-icon">▶</div>
+                </div>
+                <h1 class="title-main">
+                    Edit your Cisco RoomOS macros<br>
+                    <span class="gradient-text">directly in VS Code</span>
+                </h1>
+                <div class="xapi-badge">
+                    <span class="badge-icon">🛠️</span>
+                    <span class="badge-text">Built with Cisco xAPI</span>
+                </div>
+                <p class="subtitle">
+                    No more tedious copy-pasting from the web interface. Manage all your macros with the power 
+                    of the VS Code editor, IntelliSense, AI agent coding, and native debugging tools.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Virtual File System -->
+        <div class="slide print-slide" data-slide="2">
+            <div class="slide-content">
+                <h2 class="slide-title">The Virtual File System</h2>
+                <div class="architecture-interactive">
+                    <div class="arch-side local">
+                        <div class="env-card">
+                            <div class="vscode-logo">⌨️</div>
+                            <h3>Local Environment</h3>
+                            <p class="arch-label">VS Code Editor</p>
+                            <div class="file-list">
+                                <div class="file-item">📄 macro_1</div>
+                                <div class="file-item">📄 macro_2</div>
+                                <div class="file-item">📄 utils</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="arch-connector-interactive">
+                        <div class="protocol-badge">codecfs://</div>
+                        <div class="connection-status">🔗 Connected</div>
+                    </div>
+
+                    <div class="arch-side remote">
+                        <div class="env-card">
+                            <div class="cisco-device-animated">
+                                <div class="device-body">
+                                    <div class="cisco-logo">Codec</div>
+                                    <div class="status-lights">
+                                        <span class="light active"></span>
+                                        <span class="light active"></span>
+                                        <span class="light active"></span>
+                                        <span class="light"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Remote Environment</h3>
+                            <p class="arch-label">Cisco Codec</p>
+                            <p class="framework-label">RoomOS Macro Framework</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="connector-text">Remote macros appear and behave exactly like standard local files thanks to the virtual file system.</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Live Sync -->
+        <div class="slide print-slide" data-slide="3">
+            <div class="slide-content">
+                <h2 class="slide-title">Code, Sync, Repeat</h2>
+                <p class="slide-subtitle">The feedback loop is reduced to a <strong>fraction of a second</strong>.<br>You save, the codec executes.</p>
+                
+                <div class="workflow-interactive">
+                    <div class="workflow-stage">
+                        <div class="stage-icon">💻</div>
+                        <h4>Code Editing</h4>
+                        <p>Write in VS Code</p>
+                    </div>
+
+                    <div class="workflow-stage">
+                        <div class="stage-icon keyboard">
+                            <div class="key">Ctrl</div>
+                            <span>+</span>
+                            <div class="key">S</div>
+                        </div>
+                        <h4>Quick Save</h4>
+                        <p>Press Ctrl+S</p>
+                    </div>
+
+                    <div class="workflow-stage">
+                        <div class="stage-icon">⚡</div>
+                        <h4>Instant Sync</h4>
+                        <p>Macro uploads immediately</p>
+                    </div>
+
+                    <div class="workflow-stage">
+                        <div class="stage-icon">🔄</div>
+                        <h4>Automatic Framework Restart</h4>
+                        <p class="small">(via codec.autoRestartOnSave parameter)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: IntelliSense xAPI -->
+        <div class="slide print-slide" data-slide="4">
+            <div class="slide-content">
+                <h2 class="slide-title">IntelliSense xAPI</h2>
+                <p class="slide-subtitle">IntelliSense knows xAPI and predicts valid paths as soon as you type the root.</p>
+                
+                <div class="xapi-demo">
+                    <div class="xapi-category">
+                        <div class="category-header">
+                            <div class="category-icon">⚡</div>
+                            <h3>Command</h3>
+                        </div>
+                        <div class="code-example">
+                            <code>xapi.Command.Audio.Volume.Increase()</code>
+                        </div>
+                    </div>
+
+                    <div class="xapi-category">
+                        <div class="category-header">
+                            <div class="category-icon">📊</div>
+                            <h3>Status</h3>
+                        </div>
+                        <div class="code-example">
+                            <code>xapi.Status.Call[1].Status.get()</code>
+                        </div>
+                    </div>
+
+                    <div class="xapi-category">
+                        <div class="category-header">
+                            <div class="category-icon">⚙️</div>
+                            <h3>Config</h3>
+                        </div>
+                        <div class="code-example">
+                            <code>xapi.Config.Audio.DefaultVolume.set(50)</code>
+                        </div>
+                    </div>
+
+                    <div class="xapi-category">
+                        <div class="category-header">
+                            <div class="category-icon">🎯</div>
+                            <h3>Event</h3>
+                        </div>
+                        <div class="code-example">
+                            <code>xapi.Event.CallDisconnect.on(event => {...})</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Code Acceleration -->
+        <div class="slide print-slide" data-slide="5">
+            <div class="slide-content">
+                <h2 class="slide-title">Code Acceleration: Stubs and Documentation</h2>
+                
+                <div class="demo-sections-redesign">
+                    <div class="demo-card left-card">
+                        <div class="card-header">
+                            <span class="card-icon">⚡</span>
+                            <h3>xAPI: Insert Stub</h3>
+                        </div>
+                        <p class="card-description">Right-click to generate code blocks instantly</p>
+                        <div class="stub-demo-compact">
+                            <div class="code-editor-small">
+                                <span class="code-text">xapi.Command.Video.Matrix.Assign</span>
+                            </div>
+                            <div class="arrow-down">↓ Right-click → Insert Stub</div>
+                            <div class="code-editor-small result multi-line">
+                                <div class="code-line">xapi.Command.Video.Matrix.Assign({</div>
+                                <div class="code-line indent">Layout: "",</div>
+                                <div class="code-line indent">Mode: "",</div>
+                                <div class="code-line indent">Output: "",</div>
+                                <div class="code-line indent">RemoteMain: "",</div>
+                                <div class="code-line indent">SourceId: ""</div>
+                                <div class="code-line">});</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-card right-card">
+                        <div class="card-header">
+                            <span class="card-icon">📖</span>
+                            <h3>xAPI: Show Help</h3>
+                        </div>
+                        <p class="card-description">Instant documentation with parameter details</p>
+                        <div class="help-demo-compact">
+                            <div class="code-snippet-small">
+                                <code>xapi.Command.Video.Matrix.Assign({ ... })</code>
+                            </div>
+                            <div class="help-content">
+                                <div class="help-header">Video.Matrix.Assign(args)</div>
+                                <p class="help-desc">Assigns video sources to an output to make simple video compositions.</p>
+                                <div class="param-list">
+                                    <div class="param"><strong>Output:</strong> Number, required (1-2)</div>
+                                    <div class="param"><strong>SourceId:</strong> Number, optional (1-5, up to 4 sources)</div>
+                                    <div class="param"><strong>Layout:</strong> String, optional ('Equal', 'Prominent')</div>
+                                    <div class="param"><strong>Mode:</strong> String, optional ('Add', 'Replace')</div>
+                                    <div class="param"><strong>RemoteMain:</strong> Number, optional (1-4)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Real-time Debugging -->
+        <div class="slide print-slide" data-slide="6">
+            <div class="slide-content">
+                <h2 class="slide-title">Real-time Debugging: Like the real thing</h2>
+                <p class="slide-subtitle">Follow the output of your active macros without ever leaving your workspace.</p>
+                
+                <div class="debugging-demo">
+                    <div class="code-panel">
+                        <div class="panel-header">
+                            <span class="file-name">macro_example.js</span>
+                        </div>
+                        <div class="code-content">
+                            <div class="code-line">
+                                <span class="line-num">4</span>
+                                <span class="code"><span class="keyword">function</span> <span class="function">sayHello</span>() {</span>
+                            </div>
+                            <div class="code-line highlight">
+                                <span class="line-num">5</span>
+                                <span class="code">  <span class="object">console</span>.<span class="method">log</span>(<span class="string">'Hello, Cisco!'</span>);</span>
+                            </div>
+                            <div class="code-line">
+                                <span class="line-num">6</span>
+                                <span class="code">}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="log-panel">
+                        <div class="panel-header">
+                            <span>RoomOS Macros Log</span>
+                        </div>
+                        <div class="log-content">
+                            <div class="log-entry">
+                                <span class="timestamp">[15:42:30]</span>
+                                <span class="log-level info">RoomOS:</span>
+                                <span class="message">Connected to SSE-DEV1</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="timestamp">[15:42:31]</span>
+                                <span class="log-level info">MacroManager:</span>
+                                <span class="message">Loading macros...</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="timestamp">[15:42:32]</span>
+                                <span class="log-level success">[aes67config]</span>
+                                <span class="message">Config loaded.</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="timestamp">[15:42:33]</span>
+                                <span class="log-level info">[1111test]</span>
+                                <span class="message">Starting execution...</span>
+                            </div>
+                            <div class="log-entry active">
+                                <span class="timestamp">[15:42:33]</span>
+                                <span class="log-level success">[1111test]</span>
+                                <span class="message">Hello, Cisco!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Fleet Management -->
+        <div class="slide print-slide" data-slide="7">
+            <div class="slide-content">
+                <h2 class="slide-title">Multiple Profiles</h2>
+                <p class="slide-subtitle">Manage multiple Cisco codecs from a single workspace</p>
+                
+                <div class="fleet-demo-compact">
+                    <div class="profiles-list">
+                        <h4>Your Profiles</h4>
+                        <div class="profile-item active">
+                            <span class="status-dot active"></span>
+                            <div class="profile-info">
+                                <span class="profile-name">Meeting Room A</span>
+                                <span class="profile-ip">192.168.1.100</span>
+                            </div>
+                        </div>
+                        <div class="profile-item">
+                            <span class="status-dot"></span>
+                            <div class="profile-info">
+                                <span class="profile-name">Conference Room B</span>
+                                <span class="profile-ip">192.168.1.101</span>
+                            </div>
+                        </div>
+                        <div class="profile-item">
+                            <span class="status-dot"></span>
+                            <div class="profile-info">
+                                <span class="profile-name">Training Room</span>
+                                <span class="profile-ip">192.168.1.102</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-form-compact">
+                        <h3>Quick Add Profile</h3>
+                        <p class="form-description">Enter IP address and credentials</p>
+                        <div class="security-note">
+                            🔒 Credentials encrypted via VS Code secure storage
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Reliability & Safety -->
+        <div class="slide print-slide" data-slide="8">
+            <div class="slide-content">
+                <h2 class="slide-title">Reliability and Resilience</h2>
+                
+                <div class="safety-features">
+                    <div class="safety-card">
+                        <div class="safety-icon">🔄</div>
+                        <h3>Automatic Reconnection</h3>
+                        <p>Handles network failures gracefully with automatic reconnection attempts. Manual relaunch available via the title bar.</p>
+                    </div>
+
+                    <div class="safety-card">
+                        <div class="safety-icon">🛡️</div>
+                        <h3>Protection Against Deletion</h3>
+                        <p><code>codec.confirmMacroDelete</code> is enabled by default. Requires explicit confirmation before permanently deleting a macro from the device.</p>
+                    </div>
+
+                    <div class="safety-card">
+                        <div class="safety-icon">⚡</div>
+                        <h3>Automatic Restarts</h3>
+                        <p>Automatic restart of the framework upon macro upload, activation or deactivation (<code>codec.autoRestartOnActivateDeactivate</code>).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Quick Start -->
+        <div class="slide print-slide" data-slide="9">
+            <div class="slide-content">
+                <h2 class="slide-title">3-Step Quick Start</h2>
+                
+                <div class="quickstart-timeline">
+                    <div class="timeline-step">
+                        <div class="step-circle">
+                            <div class="step-number">1</div>
+                        </div>
+                        <div class="step-content">
+                            <h3>Install</h3>
+                            <p>Search for <strong>"RoomOS Macros"</strong> by Zacharie Gignac in the Marketplace (Ctrl+Shift+X) and click Install.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="step-circle">
+                            <div class="step-number">2</div>
+                        </div>
+                        <div class="step-content">
+                            <h3>Connect</h3>
+                            <p>Click on <strong>"Add Profile"</strong> and enter the IP address of your codec and your administration credentials.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="step-circle">
+                            <div class="step-number">3</div>
+                        </div>
+                        <div class="step-content">
+                            <h3>Code</h3>
+                            <p>Existing macros are displayed. Create, edit, save, and deploy instantly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Final / Download -->
+        <div class="slide print-slide" data-slide="10">
+            <div class="slide-content final-slide">
+                <div class="final-content">
+                    <h1 class="final-title">Macros Virtual Filesystem<br><span class="gradient-text">for Cisco Codecs</span></h1>
+                    
+                    <p class="final-tagline">Transform Cisco macros coding into a modern, secure, and centralized development experience.</p>
+
+                    <div class="download-section">
+                        <p class="download-text">Download from VS Code Marketplace:</p>
+                        <p class="download-link">marketplace.visualstudio.com/items?itemName=ZacharieGignac.roomos-macros-extension</p>
+                    </div>
+
+                    <div class="community-section">
+                        <div class="community-icon">❤️</div>
+                        <div class="community-text">
+                            <p><strong>Independent Community Project</strong> • MIT License</p>
+                            <p>Created by Zacharie Gignac for the Cisco collaboration community</p>
+                        </div>
+                    </div>
+
+                    <div class="footer-disclaimer">
+                        <p>Not affiliated with Cisco Systems, Inc.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
