@@ -171,15 +171,14 @@ function demoLead() {
       ae: ['adsr', (b) => ENV(b, [12, 300, 0.75, 260, 0, 1.1])],
       vca: ['gain', (b) => S(b, { gain: 0 })],
       fx: ['fx', demoFx('LUSH ENSEMBLE', 0.5)],
-      dl: ['delay', demoDelay(0.402, 0.42, 0.28, 5000)],
     },
     wires: [
       ['seq.pitch', 'o1.freq'], ['seq.pitch', 'o2.freq'], ['v1.out', 'o1.detune'], ['v2.out', 'o2.detune'],
       ['o1.out', 'mix.in1'], ['o2.out', 'mix.in2'], ['fm.out', 'fl.cutoff'], ['mix.out', 'fl.in'],
-      ['seq.gate', 'ae.gate'], ['fl.out', 'vca.in'], ['ae.out', 'vca.gain'], ['vca.out', 'fx.in'], ['fx.out', 'dl.in'],
+      ['seq.gate', 'ae.gate'], ['fl.out', 'vca.in'], ['ae.out', 'vca.gain'],       ['vca.out', 'fx.in'],
     ],
     inputs: [{ name: 'TRIGGER', kind: 'value', to: ['seq.trig'] }],
-    outputs: [{ name: 'WAVE', kind: 'wave', from: 'dl.out' }],
+          outputs: [{ name: 'WAVE', kind: 'wave', from: 'fx.out' }],
   };
 }
 
