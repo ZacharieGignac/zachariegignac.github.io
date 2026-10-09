@@ -1195,6 +1195,7 @@ const BLOCK_CATALOG = [
     ['trigger', 'TRIGGER BUTTON', 'Click or press SPACE for a gate'],
     ['keyboard', 'KEYBOARD', 'Play notes with the keys'],
     ['audioin', 'AUDIO INPUT', 'Any audio input'],
+    ['player', 'AUDIO PLAYER', 'Plays mp3, wav, ogg... files from your computer'],
   ]],
   ['PROCESS', [
     ['gain', 'GAIN', 'Louder, quieter, or inverted'],
@@ -1210,6 +1211,7 @@ const BLOCK_CATALOG = [
   ]],
   ['OUTPUT', [
     ['spectrum', 'SPECTRUM', 'Frequency display, passes the wave'],
+    ['viz', 'VISUALIZER', 'Spectrum, waterfall, scope, meters and measurements'],
     ['out', 'SOUND OUTPUT', 'Plays to the soundcard'],
   ]],
 ];
@@ -1703,7 +1705,8 @@ class App {
     this.bindUI();
     try {
       const src = WORKLET_SRC + (typeof EXTRA_WORKLET_SRC === 'string' ? EXTRA_WORKLET_SRC : '')
-        + (typeof FX_WORKLET_SRC === 'string' ? FX_WORKLET_SRC : '');
+        + (typeof FX_WORKLET_SRC === 'string' ? FX_WORKLET_SRC : '')
+        + (typeof SCRIPT_WORKLET_SRC === 'string' ? SCRIPT_WORKLET_SRC : '');
       const url = URL.createObjectURL(new Blob([src], { type: 'application/javascript' }));
       await this.ctx.audioWorklet.addModule(url);
     } catch (err) {
@@ -2021,8 +2024,13 @@ class App {
   canConnect(fromBlock, fromPort, toBlock, toPort) {
     const o = this.portDef(fromBlock, fromPort, true);
     const i = this.portDef(toBlock, toPort, false);
-    if (!o || !i || o.kind !== i.kind || fromBlock === toBlock || fromBlock.tab !== toBlock.tab) return false;
-    return !this.reaches(this.nodeIn(toBlock, toPort), this.nodeOut(fromBlock, fromPort));
+    if (!o || !i || o.kind !== i.kind || fromBlock.tab !== toBlock.tab) return false;
+    // Wave loops (feedback) are allowed. Value loops are not: values are read recursively and would never settle.
+    return o.kind === 'wave' || !this.closesLoop(fromBlock, fromPort, toBlock, toPort);
+  }
+
+  closesLoop(fromBlock, fromPort, toBlock, toPort) {
+    return this.reaches(this.nodeIn(toBlock, toPort), this.nodeOut(fromBlock, fromPort));
   }
 
   connect(fromBlock, fromPort, toBlock, toPort) {
@@ -2032,7 +2040,16 @@ class App {
       if (existing.from.block === fromBlock && existing.from.port === fromPort) return existing;
       this.disconnect(existing, true); // replaced right away, so the block is not told the input went empty
     }
-    fromBlock.audioOut(fromPort).connect(toBlock.audioIn(toPort));
+    // Web Audio silences any loop that has no delay in it, so the wire that closes a loop gets a tiny one.
+    let delay = null;
+    if (this.closesLoop(fromBlock, fromPort, toBlock, toPort)) {
+      delay = this.ctx.createDelay(0.1);
+      delay.delayTime.value = 0.003;
+      fromBlock.audioOut(fromPort).connect(delay);
+      delay.connect(toBlock.audioIn(toPort));
+    } else {
+      fromBlock.audioOut(fromPort).connect(toBlock.audioIn(toPort));
+    }
 
     const kind = this.portDef(fromBlock, fromPort, true).kind;
     const vis = document.createElementNS(SVG_NS, 'path');
@@ -2044,7 +2061,7 @@ class App {
     g.append(vis, hit);
     fromBlock.tab.svg.append(g);
 
-    const conn = { from: { block: fromBlock, port: fromPort }, to: { block: toBlock, port: toPort }, tab: fromBlock.tab, g, vis, hit };
+    const conn = { from: { block: fromBlock, port: fromPort }, to: { block: toBlock, port: toPort }, tab: fromBlock.tab, g, vis, hit, delay };
     hit.addEventListener('pointerdown', (e) => { e.stopPropagation(); this.select(conn); });
     hit.addEventListener('dblclick', () => this.disconnect(conn));
     this.conns.push(conn);
@@ -2059,7 +2076,12 @@ class App {
     if (i < 0) return;
     this.conns.splice(i, 1);
     try {
-      conn.from.block.audioOut(conn.from.port).disconnect(conn.to.block.audioIn(conn.to.port));
+      if (conn.delay) {
+        conn.from.block.audioOut(conn.from.port).disconnect(conn.delay);
+        conn.delay.disconnect();
+      } else {
+        conn.from.block.audioOut(conn.from.port).disconnect(conn.to.block.audioIn(conn.to.port));
+      }
     } catch (_) { /* already disconnected */ }
     conn.g.remove();
     if (this.selected === conn) this.selected = null;

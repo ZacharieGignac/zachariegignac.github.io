@@ -147,7 +147,10 @@ window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('drop', (e) => {
     if (!e.dataTransfer || !e.dataTransfer.files.length) return;
     e.preventDefault();
-    if (ready()) app.loadFile(e.dataTransfer.files[0]);
+    const [file] = e.dataTransfer.files;
+    if (!ready()) return;
+    if (isAudioFile(file)) app.dropAudioFile(file);
+    else app.loadFile(file);
   });
 
   window.addEventListener('keydown', (e) => {

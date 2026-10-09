@@ -461,6 +461,59 @@ canvas.scope, canvas.meter {
 }
 canvas.meter { height: 14px; }
 canvas.spectrum { height: 110px; }
+
+/* AUDIO PLAYER block */
+canvas.player-wave, canvas.player-meter {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  border: 2px solid var(--green-dim);
+  background: #031006;
+}
+canvas.player-wave { cursor: pointer; touch-action: none; }
+.block.player.drop-target { border-color: var(--amber); box-shadow: 0 0 16px rgba(255, 176, 0, 0.6), 6px 6px 0 rgba(0, 0, 0, 0.6); }
+.player-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: none; }
+.player-time { text-align: center; font-size: 16px; }
+.btn-row button:disabled { opacity: 0.4; cursor: default; }
+
+/* VISUALIZER block */
+.block.viz { width: 420px; }
+.viz-view { display: flex; flex-direction: column; gap: 6px; }
+.viz-modes { display: flex; gap: 3px; }
+.viz-modes button { flex: 1; padding: 2px 0; font-size: 10px; }
+.viz-modes button.active { background: var(--green); color: #000; }
+canvas.viz-canvas, canvas.viz-meter {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  border: 2px solid var(--green-dim);
+  background: #031006;
+}
+.viz-info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.viz-cell { display: flex; flex-direction: column; min-width: 0; padding: 2px 6px 3px; background: #020a03; border: 1px solid #14502a; }
+.viz-cell .cap { font-size: 9px; color: var(--green-dim); white-space: nowrap; }
+.viz-cell b { font-size: 13px; font-weight: normal; color: var(--amber); text-shadow: 0 0 5px rgba(255, 176, 0, 0.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.viz-cell.dim b { color: var(--green-dim); text-shadow: none; }
+.viz-cell.warn b { color: var(--red); text-shadow: 0 0 6px rgba(255, 74, 58, 0.7); }
+.viz-cell[data-tipkey="clips"] { cursor: pointer; }
+.viz-overlay { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.8); }
+.viz-panel {
+  width: min(760px, 96vw);
+  max-height: 96vh;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--panel);
+  border: 2px solid var(--green);
+  box-shadow: 0 0 24px rgba(51, 255, 102, 0.35);
+}
+.viz-bar { display: flex; justify-content: space-between; align-items: center; color: var(--green); font-weight: bold; }
+.viz-panel .viz-cell b { font-size: 15px; }
 canvas.steps { height: 120px; cursor: crosshair; touch-action: none; }
 canvas.sp-grid { height: auto; cursor: crosshair; touch-action: none; }
 
@@ -491,7 +544,7 @@ canvas.response { height: 100px; }
 /* SCRIPT block */
 .script-list { display: flex; flex-direction: column; gap: 3px; }
 .script-row { display: grid; grid-template-columns: 1fr 52px 58px 22px; gap: 4px; align-items: center; }
-.script-row.out { grid-template-columns: 1fr 22px; }
+.script-row.out { grid-template-columns: 1fr 52px 22px; }
 .script-row input { min-width: 0; width: 100%; box-sizing: border-box; text-transform: none; }
 /* variable names are case-sensitive, so show them exactly as typed */
 .block.script .port-row .name { text-transform: none; }
@@ -513,6 +566,30 @@ textarea.script-code {
   -webkit-user-select: text;
 }
 textarea.script-code:focus { outline: none; border-color: var(--amber); }
+textarea.script-code.wave { height: 120px; }
+.script-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  padding: 4vh 4vw;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.75);
+}
+.script-overlay-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: #041006;
+  border: 2px solid var(--green);
+}
+.script-overlay-bar { display: flex; justify-content: space-between; align-items: center; color: var(--green); }
+.script-overlay .script-list { flex: 1 1 0; min-height: 0; }
+.script-overlay textarea.script-code, .script-overlay textarea.script-code.wave { flex: 1 1 0; height: auto; min-height: 80px; font-size: 14px; resize: none; }
+.script-overlay .script-status { flex: none; font-size: 12px; }
 .script-status { min-height: 14px; font-size: 10px; color: var(--green-dim); overflow-wrap: anywhere; }
 .script-status.error { color: #ff4a3a; }
 .minmax { display: grid; grid-template-columns: 30px 1fr 30px 1fr; gap: 6px; align-items: center; width: 100%; }
