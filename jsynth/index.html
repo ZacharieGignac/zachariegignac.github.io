@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSYNTH</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="toolbar">
+  <h1>JSYNTH<span class="cursor">_</span></h1>
+  <div class="group">
+    <button id="toggleTabs" class="toggle active" title="Show or hide the tabs pane">TABS</button>
+    <button id="toggleBlocks" class="toggle active" title="Show or hide the block library">BLOCKS</button>
+  </div>
+  <div class="group">
+    <span class="label">ZOOM</span>
+    <button id="zoomOut" title="Zoom out (Ctrl + mouse wheel, Ctrl -)">-</button>
+    <button id="zoomReset" title="Back to 100% (Ctrl 0)">100%</button>
+    <button id="zoomIn" title="Zoom in (Ctrl + mouse wheel, Ctrl +)">+</button>
+    <button id="zoomFit" title="Fit everything in view">FIT</button>
+  </div>
+  <div class="group">
+    <button id="newProject" title="Start a new, empty project">NEW</button>
+    <button id="save" title="Save the project as a JSON file (Ctrl+S)">SAVE</button>
+    <button id="load" title="Load a project or pack JSON file (Ctrl+O, or drop a file on the page)">LOAD</button>
+    <input type="file" id="fileInput" accept=".json,application/json" hidden>
+  </div>
+  <div class="spacer"></div>
+  <span id="hint">DRAG PORT TO PORT &bull; RIGHT-CLICK BLOCKS TO PACK &bull; CLICK WIRE + DEL TO CUT</span>
+  <button id="power" class="power" disabled>POWER: OFF</button>
+</header>
+<div id="layout">
+  <aside id="sidebar">
+    <div class="side-head">
+      <span>TABS</span>
+      <span><button id="newFolder" title="Create a folder">+ FOLDER</button> <button id="hideTabs" title="Hide this pane">&lt;</button></span>
+    </div>
+    <div id="tabs"></div>
+  </aside>
+  <main id="stage"></main>
+  <aside id="blockpane">
+    <div class="side-head">
+      <button id="hideBlocks" title="Hide this pane">&gt;</button>
+      <span>BLOCK LIBRARY</span>
+    </div>
+    <div class="pane-search"><input type="text" id="blockFilter" placeholder="FILTER BLOCKS..." autocomplete="off"></div>
+    <div id="blocklist"></div>
+  </aside>
+</div>
+<div id="status">LOADING AUDIO ENGINE...</div>
+<div class="scanlines"></div>
+<script src="app.js"></script>
+<script src="blocks-extra.js"></script>
+<script src="fx-dsp.js"></script>
+<script src="effects.js"></script>
+<script src="seqpro.js"></script>
+<script src="detector.js"></script>
+<script src="script.js"></script>
+<script src="demo.js"></script>
+<script src="packs.js"></script>
+<script src="packs-library.js"></script>
+<script src="project.js"></script>
+<script src="tooltips.js"></script>
+<script src="monitor.js"></script>
+</body>
+</html>
